@@ -33,9 +33,9 @@
         Param2: number of clices in the slicemap
         Param3: number of col in the slicemap
         Param4: number of row in the slicemap
-        Param5: width in pixels of one slice in the slicemap (Make it smaller for good performance and bad quality)
+        Param5: width in pixels of one slice in the slicemap (Make it smaller for good performance and bad quality) = slicemap_width / slicemap_col (4096 / 10 = 409)
         */
-		volumerc_main('static/img/aorta-high.jpg','static/img/tf.png',100 , 10, 10, 400);
+		volumerc_main('static/img/aorta-high.jpg','static/img/tf.png', 100, 10, 10, 409);
 
 	};
 
@@ -60,7 +60,7 @@
         </div>
         <div id="popup" class="hidden"></div>
     </div>
-	<canvas id="canvas_win" width="768" height="768" style="width: 100%; height: 100%;"></canvas>
+	<canvas id="canvas_win" width="512" height="512" style="width: 100%; height: 100%;"></canvas>
     
 </div>
 

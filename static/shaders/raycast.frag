@@ -32,7 +32,7 @@ uniform float uSlicesOverX;
 uniform float uSlicesOverY;
 uniform float uSteps;
 
-const float steps = 195.0;
+// const float steps = 195.0;
 
 float getVolumeValue(vec3 volpos)
 {
@@ -96,8 +96,8 @@ void main(void)
 		tf_pos.x = getVolumeValue(vpos.xyz);
 		tf_pos.y = 0.5;
 		
-		// value = texture2D(uTransferFunction,tf_pos);
-		value = vec4(tf_pos.x);
+		value = texture2D(uTransferFunction,tf_pos);
+		// value = vec4(tf_pos.x);
 
 		if(value.x < uMinGray || value.x > uMaxGray || value.a < 0.15) {
 		    value = vec4(0.0);
