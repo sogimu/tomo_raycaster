@@ -1,0 +1,78 @@
+<html>
+
+<head>
+
+<script type="text/javascript" src="static/js/sylvester.js"></script>
+<script type="text/javascript" src="static/js/glUtils.js"></script>
+<script type="text/javascript" src="static/js/glAux.js"></script>
+<script type="text/javascript" src="static/js/volumerc.js"></script>
+
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="static/js/generic-slider.js"></script>
+
+<script type="text/javascript" src="static/js/main.js"></script>
+<link rel="stylesheet" style="text/css" href="static/css/jquery.contextMenu.css">
+<link rel="stylesheet" style="text/css" href="static/css/jquery.jqplot.css">
+<link rel="stylesheet" style="text/css" href="static/css/jquery-ui.css">
+<link rel="stylesheet" style="text/css" href="static/css/jquery-ui.structure.css">
+
+<link rel="stylesheet" style="text/css" href="static/css/custom.css" />
+
+</head>
+
+<body>
+<script type="text/javascript">
+	window.onload = function()
+	{
+		init();
+
+        /*
+        Param0: path to picture with the slicemap
+        Param1: path to picture with the transfer function
+        Param2: number of clices in the slicemap
+        Param3: number of col in the slicemap
+        Param4: number of row in the slicemap
+        Param5: width in pixels of one slice in the slicemap (Make it smaller for good performance and bad quality)
+        */
+		volumerc_main('static/img/aorta-high.jpg','static/img/tf.png',100 , 10, 10, 400);
+
+	};
+
+</script>
+
+<div id="container-header">
+	<h1>Real-Time Interactive Visualization of Volumetric Data with WebGL (Raycasting)</h1>
+
+</div>
+
+<div id="container">
+    <div id="container-header" class="float-left">
+        <div id="container-stats" class="float-left">
+        </div>
+        <div id="volume-information" class="float-left">
+            <div id="progress">
+                <div id="progress-container" class="hidden">
+                    <p>Downloading <span id="texturePath"></span></p>
+                    <progress id="image-progress" class="margin-top" style="width: 100%;" value="0" max="100" ></progress>
+                </div>
+            </div>
+        </div>
+        <div id="popup" class="hidden"></div>
+    </div>
+	<canvas id="canvas_win" width="768" height="768" style="width: 100%; height: 100%;"></canvas>
+    
+</div>
+
+<div id="bottom-controls-container">
+    <div id="bottom-controls">
+    	<span>gray value selection</span>
+    	<div id="gray-slider"></div>
+    	<input id="grayMin" class="gray small-width center" value="" />
+    	<input id="grayMax" class="gray small-width center" value="" />
+    	<br>
+    </div>    
+</div>
+</body>
+<html>
+
