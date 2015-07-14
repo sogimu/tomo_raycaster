@@ -4,9 +4,9 @@ function init()
     GenericSlider.initSlider(
         slider = $( "#gray-slider" ),
         sliderInputs = $('input.gray'),
-        0,
+        1,
         255,
-        0,
+        1,
         255,
         function(values) {
             minGray = values[0] / 255;   
@@ -14,5 +14,35 @@ function init()
             drawVolume(); 
         }
     );
+
+    // init opacity value slider
+    GenericSlider.initSlider(
+        slider = $( "#opacity-slider" ),
+        sliderInputs = $('#opacity-input'),
+        0,
+        255,
+        255,
+        255,
+        function(values) {
+            opacityVal = values[0] / 255;   
+            drawVolume(); 
+        }
+    );
+
+    // init gray value slider
+    GenericSlider.initSlider(
+        slider = $( "#color-slider" ),
+        sliderInputs = $('color-input'),
+        0,
+        255,
+        255,
+        255,
+        function(values) {
+            colorVal = values[0] / 255;   
+            drawVolume(); 
+        }
+    );
+
+
 
 }

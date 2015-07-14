@@ -21,7 +21,7 @@ GLobal variables
 /*
 Zoom factor
 */
-var zoom=2.0;
+var zoom=1.2;
 
 /*
 */
@@ -118,6 +118,9 @@ function initShaders(gl, vertex_url, fragment_url)
 	
 	shaderProgram.uMinGray = gl.getUniformLocation(shaderProgram, "uMinGray");
 	shaderProgram.uMaxGray = gl.getUniformLocation(shaderProgram, "uMaxGray");
+
+	shaderProgram.uOpacityVal = gl.getUniformLocation(shaderProgram, "uOpacityVal");
+	shaderProgram.uColorVal = gl.getUniformLocation(shaderProgram, "uColorVal");
 	
 	shaderProgram.uSlicesOverX = gl.getUniformLocation(shaderProgram, "uSlicesOverX");
 	shaderProgram.uSlicesOverY = gl.getUniformLocation(shaderProgram, "uSlicesOverY");
@@ -252,6 +255,16 @@ function setMinMaxGrayUniforms(gl, min, max)
 	gl.uniform1f(gl.shaderProgram.uMaxGray, max);
 }
 
+function setOpacityValUniforms(gl, opacityVal)
+{
+	gl.uniform1f(gl.shaderProgram.uOpacityVal, opacityVal);
+}
+
+function setColorValUniforms(gl, colorVal)
+{
+	gl.uniform1f(gl.shaderProgram.uColorVal, colorVal);
+}
+
 function setSliceOverAxisUniforms(gl, overX, overY)
 {
 	gl.uniform1f(gl.shaderProgram.uSlicesOverX, overX);
@@ -279,7 +292,7 @@ drawCube
 
 render the cube
 */
-function drawCube(gl,cube, numberOfSlices, overX, overY, steps, minGray, maxGray)
+function drawCube(gl,cube, numberOfSlices, overX, overY, steps, minGray, maxGray, opacityVal, colorVal)
 {
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
@@ -301,6 +314,8 @@ function drawCube(gl,cube, numberOfSlices, overX, overY, steps, minGray, maxGray
 	setMatrixUniforms(gl);
 	setNumberOfSlicesUniforms(gl, numberOfSlices);
 	setMinMaxGrayUniforms(gl, minGray, maxGray);
+	setOpacityValUniforms(gl, opacityVal);
+	setColorValUniforms(gl, colorVal);
 	setSliceOverAxisUniforms(gl, overX, overY)
 	setStepsUniforms(gl, steps)
 
@@ -406,8 +421,11 @@ main function
 function volumerc_main(imgData, imgTF, numberOfSlices, overX, overY, steps)
 {
 	steps = Math.floor(steps)
-	minGray = 0.0
+	minGray = 0.004
 	maxGray = 1.0
+
+	opacityVal = 1.0
+	colorVal = 1.0
 
 	var canvas = document.getElementById("canvas_win");
 	var gl;
@@ -446,7 +464,7 @@ function volumerc_main(imgData, imgTF, numberOfSlices, overX, overY, steps)
 		gl.useProgram(gl.shaderProgram);
 		gl.clearDepth(-1.0)
 		gl.depthFunc(gl.GEQUAL);
-		drawCube(gl, cube, numberOfSlices, overX, overY, steps, minGray, maxGray);
+		drawCube(gl, cube, numberOfSlices, overX, overY, steps, minGray, maxGray, opacityVal, colorVal);
 
 		gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 		gl.shaderProgram = gl.shaderProgram_RayCast;
@@ -467,7 +485,7 @@ function volumerc_main(imgData, imgTF, numberOfSlices, overX, overY, steps)
 		gl.uniform1i(gl.getUniformLocation(gl.shaderProgram, "uVolData"), 1);
 		gl.uniform1i(gl.getUniformLocation(gl.shaderProgram, "uTransferFunction"), 2);
 
-		drawCube(gl, cube, numberOfSlices, overX, overY, steps, minGray, maxGray);
+		drawCube(gl, cube, numberOfSlices, overX, overY, steps, minGray, maxGray, opacityVal, colorVal);
 	}
 
 	setTimeout(drawVolume, 15);

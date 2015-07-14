@@ -35,7 +35,7 @@
         Param4: number of row in the slicemap
         Param5: width in pixels of one slice in the slicemap (Make it smaller for good performance and bad quality) = slicemap_width / slicemap_col (4096 / 10 = 409)
         */
-		volumerc_main('static/img/aorta-high.jpg','static/img/tf.png', 100, 10, 10, 409);
+		volumerc_main('lidar.raw-6.png','static/img/tf.png', 110, 16, 16, 256);
 
 	};
 
@@ -71,6 +71,15 @@
     	<input id="grayMin" class="gray small-width center" value="" />
     	<input id="grayMax" class="gray small-width center" value="" />
     	<br>
+        <span>opacity value selection</span>
+        <div id="opacity-slider"></div>
+        <input id="opacity-input" class="gray small-width center" value="" />
+        <br>
+
+        <span>color value selection</span>
+        <div id="color-slider"></div>
+        <input id="color-input" class="gray small-width center" value="" />
+        <br>
     </div>    
 </div>
 </body>

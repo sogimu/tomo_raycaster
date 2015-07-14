@@ -29,8 +29,8 @@ varying vec4 backColor;
 
 void main(void)
 {
+	backColor = aVertexColor;
+
 	vec4 pos = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
 	gl_Position = pos;
-	backColor = aVertexColor;
 }
-

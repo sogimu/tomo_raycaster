@@ -25,17 +25,14 @@ attribute vec4 aVertexColor;
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 
-// uniform float uNumberOfSlices;
-
 varying vec4 frontColor;
 varying vec4 pos;
-// varying float numberOfSlices;
 
 void main(void)
 {
+	frontColor = aVertexColor;
+
 	pos = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
 	gl_Position = pos;
-	frontColor = aVertexColor;
-	//numberOfSlices = uNumberOfSlices;
 }
 
